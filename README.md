@@ -38,7 +38,3 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 - `npm run format` - Format code with Prettier
-
-## Documentation
-
-For detailed documentation about project setup, folder structure, packages, and theme configuration, see the [`/docs`](docs) folder.
