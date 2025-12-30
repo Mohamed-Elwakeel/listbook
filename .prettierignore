@@ -1,0 +1,10 @@
+# Dependencies and build artifacts
+/node_modules
+/build
+
+# Files handled by your existing .eslintignore
+src/models/models
+amplify-codegen-temp/models/models
+
+# Taildwind config (it is ignored by default usually, but good to be explicit)
+tailwind.config.js
