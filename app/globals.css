@@ -22,8 +22,8 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
+  --surface: var(--card);
+  --surface-foreground: var(--card-foreground);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
