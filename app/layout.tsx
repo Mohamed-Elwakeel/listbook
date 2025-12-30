@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'ListBook',
-  description: 'Organize, track, and manage your lists effortlessly.',
+  description: 'Create, track, and manage your lists effortlessly.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
