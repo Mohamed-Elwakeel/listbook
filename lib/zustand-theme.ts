@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface ThemeState {
   darkMode: boolean;
@@ -6,16 +7,13 @@ interface ThemeState {
   setDarkMode: (value: boolean) => void;
 }
 
-export const useThemeStore = create<ThemeState>((set) => ({
-  darkMode: false,
-  toggle: () =>
-    set((state) => {
-      const newMode = !state.darkMode;
-      document.documentElement.classList.toggle('dark', newMode);
-      return { darkMode: newMode };
+export const useThemeStore = create<ThemeState>()(
+  persist(
+    (set) => ({
+      darkMode: false,
+      toggle: () => set((state) => ({ darkMode: !state.darkMode })),
+      setDarkMode: (value) => set({ darkMode: value }),
     }),
-  setDarkMode: (value: boolean) => () => {
-    document.documentElement.classList.toggle('dark', value);
-    return { darkMode: value };
-  },
-}));
+    { name: 'theme-storage' },
+  ),
+);
