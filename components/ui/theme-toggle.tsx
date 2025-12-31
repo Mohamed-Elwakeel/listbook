@@ -1,14 +1,14 @@
 'use client';
 
+import { useDark } from '@/lib/hooks/use-dark';
 import { Button } from './button';
-import { useThemeStore } from '@/lib/zustand-theme';
 import { Sun, Moon } from 'lucide-react';
 
 export function ThemeToggle() {
-  const { darkMode, toggle } = useThemeStore();
+  const { darkMode, toggleDarkMode } = useDark();
 
   return (
-    <Button variant="outline" size="sm" onClick={toggle} aria-label="Toggle theme">
+    <Button variant="outline" size="sm" onClick={toggleDarkMode} aria-label="Toggle theme">
       {darkMode ? <Sun className="size-4" /> : <Moon className="size-4" />}
       {darkMode ? 'Light Mode' : 'Dark Mode'}
     </Button>
