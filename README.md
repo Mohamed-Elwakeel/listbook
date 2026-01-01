@@ -1,10 +1,10 @@
-# ListBook
+# Collectanea
 
 A modern web application for creating and managing lists of your favorite content—movies, games, songs, books, and more.
 
 ## About
 
-ListBook helps you organize and track the media you love. Create custom lists, categorize your content, and keep track of what you've watched, played, read, or listened to.
+Collectanea helps you organize and track the media you love. Create custom lists, categorize your content, and keep track of what you've watched, played, read, or listened to.
 
 ## Getting Started
 
