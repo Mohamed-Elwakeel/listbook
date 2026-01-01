@@ -10,7 +10,7 @@ export function ThemeToggle() {
   return (
     <Button variant="outline" size="sm" onClick={toggleDarkMode} aria-label="Toggle theme">
       {darkMode ? <Sun className="size-4" /> : <Moon className="size-4" />}
-      {darkMode ? 'Light Mode' : 'Dark Mode'}
+      {darkMode ? 'Light' : 'Dark'}
     </Button>
   );
 }
