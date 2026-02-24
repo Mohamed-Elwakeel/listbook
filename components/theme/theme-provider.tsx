@@ -1,6 +1,6 @@
 'use client';
 
-import { useThemeStore } from '@/lib/zustand-theme';
+import { useThemeStore } from '@/store/zustand-theme';
 
 export function ThemeProvider() {
   const darkMode = useThemeStore((state) => state.darkMode);
