@@ -1,5 +1,6 @@
 import { Container } from '@/components/layout/container';
 import { MediaList } from '@/components/features/media-list';
+import { SearchCommand } from '@/components/features/search-command';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
             {/* We will put an "Add" button here later */}
           </header>
 
+          <SearchCommand />
           {/* This component handles all the items */}
           <MediaList />
         </div>
