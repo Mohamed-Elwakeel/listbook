@@ -1,41 +1,32 @@
 'use client';
 
 import { useListStore } from '@/store/useListStore';
-import { CATEGORIES } from '@/lib/categories';
+import { useQueryState } from 'nuqs';
+import { MediaCard } from './media-card';
 
 export function MediaList() {
   const { items } = useListStore();
+  const [activeCategory] = useQueryState('category', { defaultValue: 'movies' });
 
-  if (items.length === 0) {
+  // Only show items that match the current Tab (Filtering logic)
+  const filteredItems = items.filter((item) => item.category === activeCategory);
+
+  if (filteredItems.length === 0) {
     return (
-      <div className="border-border flex h-64 flex-col items-center justify-center rounded-xl border-2 border-dashed text-center">
-        <p className="text-muted-foreground text-lg">Your list is empty.</p>
-        <p className="text-sm opacity-70">Start by adding a new item above.</p>
+      <div className="border-border flex h-40 items-center justify-center border border-dashed text-center">
+        <p className="text-muted-foreground text-xs tracking-widest uppercase">
+          No {activeCategory} in your collection
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((item) => {
-        const categoryConfig = CATEGORIES[item.category];
-        const Icon = categoryConfig.icon;
-
-        return (
-          <div
-            key={item.id}
-            className="bg-background transition-hover flex items-center gap-4 rounded-2xl border p-4 shadow-sm hover:shadow-md"
-          >
-            <div className="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-xl">
-              <Icon size={24} />
-            </div>
-            <div className="flex-1 overflow-hidden">
-              <h3 className="truncate font-semibold">{item.title}</h3>
-              <p className="text-muted-foreground text-xs capitalize">{item.status}</p>
-            </div>
-          </div>
-        );
-      })}
+    <div className="bg-border grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-3">
+      {/* gap-px with bg-border creates a clean "Grid Line" look instead of separate cards */}
+      {filteredItems.map((item) => (
+        <MediaCard key={item.id} item={item} />
+      ))}
     </div>
   );
 }
