@@ -1,58 +1,32 @@
 'use client';
 
-import { MediaCard } from '@/components/features/media-card';
 import { useListStore } from '@/store/useListStore';
-import { MediaItem } from '@/types';
-import { Search } from 'lucide-react';
-
-// Temporarily mock data for design testing
-const MOCK_ITEMS: MediaItem[] = [
-  {
-    id: '1',
-    title: 'Inception',
-    category: 'movies',
-    status: 'completed',
-    creator: 'Christopher Nolan',
-    year: '2010',
-    addedAt: Date.now(),
-  },
-  {
-    id: '2',
-    title: 'The Great Gatsby',
-    category: 'books',
-    status: 'backlog',
-    creator: 'F. Scott Fitzgerald',
-    year: '1925',
-    addedAt: Date.now(),
-  },
-  {
-    id: '3',
-    title: 'Elden Ring',
-    category: 'games',
-    status: 'in-progress',
-    creator: 'FromSoftware',
-    year: '2022',
-    addedAt: Date.now(),
-  },
-];
+import { useQueryState } from 'nuqs';
+import { MediaCard } from './media-card';
 
 export function MediaList() {
   const { items } = useListStore();
-  const displayItems = items.length > 0 ? items : MOCK_ITEMS;
+  const [activeCategory] = useQueryState('category', { defaultValue: 'movies' });
+
+  // Only show items that match the current Tab (Filtering logic)
+  const filteredItems = items.filter((item) => item.category === activeCategory);
+
+  if (filteredItems.length === 0) {
+    return (
+      <div className="border-border flex h-40 items-center justify-center border border-dashed text-center">
+        <p className="text-muted-foreground text-xs tracking-widest uppercase">
+          No {activeCategory} in your collection
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {displayItems.map((item) => (
+    <div className="bg-border grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-3">
+      {/* gap-px with bg-border creates a clean "Grid Line" look instead of separate cards */}
+      {filteredItems.map((item) => (
         <MediaCard key={item.id} item={item} />
       ))}
-
-      {/* The "Add New" Placeholder Card */}
-      <div className="group border-border/50 bg-background/50 hover:border-primary/30 hover:bg-primary/5 flex h-full min-h-[160px] cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed transition-all">
-        <div className="bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary mb-2 rounded-full p-3 transition-colors">
-          <Search size={24} />
-        </div>
-        <p className="text-muted-foreground group-hover:text-primary text-sm font-medium">Add Something New</p>
-      </div>
     </div>
   );
 }

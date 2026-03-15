@@ -2,7 +2,8 @@
 
 import { CATEGORIES } from '@/lib/categories';
 import { MediaItem } from '@/types';
-import { ExternalLink, MoreVertical } from 'lucide-react';
+import { MoreHorizontal } from 'lucide-react';
+import { Button } from '../ui/button';
 
 interface MediaCardProps {
   item: MediaItem;
@@ -13,41 +14,28 @@ export function MediaCard({ item }: MediaCardProps) {
   const Icon = categoryConfig.icon;
 
   return (
-    <div className="group border-border/50 bg-card hover:border-primary/50 relative flex flex-col gap-3 rounded-3xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-      {/* Top Section: Icon & Actions */}
-      <div className="flex items-start justify-between">
-        <div className="bg-primary/5 text-primary ring-primary/20 group-hover:bg-primary group-hover:text-primary-foreground flex h-12 w-12 items-center justify-center rounded-2xl ring-1 transition-colors">
-          <Icon size={24} />
+    <div className="group border-border bg-card hover:bg-muted/30 flex flex-col border p-4 transition-all">
+      {/* Top Section: Flat & Clean */}
+      <div className="mb-3 flex items-center justify-between">
+        <div className="text-foreground">
+          <Icon size={18} strokeWidth={2.5} />
         </div>
-        <button className="text-muted-foreground hover:text-foreground transition-colors">
-          <MoreVertical size={20} />
-        </button>
+        <Button className="text-muted-foreground hover:text-foreground">
+          <MoreHorizontal size={18} />
+        </Button>
       </div>
 
-      {/* Content Section */}
-      <div className="space-y-1">
-        <h3 className="line-clamp-1 text-lg font-bold tracking-tight">{item.title}</h3>
-        <p className="text-muted-foreground line-clamp-1 text-xs">
-          {item.creator ? item.creator : categoryConfig.label} • {item.year || 'N/A'}
+      {/* Content: Sharp Typography */}
+      <div className="flex-1 space-y-0.5">
+        <h3 className="line-clamp-1 text-sm font-semibold tracking-tight uppercase">{item.title}</h3>
+        <p className="text-muted-foreground text-[11px] tracking-wider uppercase">
+          {item.creator || 'Unknown'} • {item.year}
         </p>
       </div>
 
-      {/* Bottom Section: Status & Meta */}
-      <div className="mt-auto flex items-center justify-between pt-2">
-        <div className="flex items-center gap-2">
-          {/* Simple Status Dot/Badge */}
-          <span className="relative flex h-2 w-2">
-            <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-            <span className="bg-primary relative inline-flex h-2 w-2 rounded-full"></span>
-          </span>
-          <span className="text-muted-foreground text-[10px] font-medium tracking-wider uppercase">
-            {item.status.replace('-', ' ')}
-          </span>
-        </div>
-
-        <div className="opacity-0 transition-opacity group-hover:opacity-100">
-          <ExternalLink size={14} className="text-muted-foreground" />
-        </div>
+      {/* Footer: Simple Text status instead of glowing dots */}
+      <div className="border-border/50 mt-4 flex items-center justify-between border-t pt-2">
+        <span className="text-primary/60 text-[9px] font-black tracking-[0.2em] uppercase">{item.status}</span>
       </div>
     </div>
   );
